@@ -3,7 +3,9 @@
 }
 .codeEditorTextArea{
     width: 98vw;
-    height: 75vh;
+    position: fixed;
+    bottom: 5%;
+    height: 15vh;
     font-family: var(--code);
     padding-right: var(--paddingLeft);
 }

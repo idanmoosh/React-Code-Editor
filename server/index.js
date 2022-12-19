@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const _ = require('lodash');
 
 const PORT = 3001;
 
@@ -17,6 +18,9 @@ const io = require('socket.io')(http, {
 
 io.on('connection', socket => {
   console.log(`user ${socket.id} just connected`);
+  socket.on('sendChanges', value => {
+    socket.broadcast.emit('getChanges', value);
+  });
 });
 
 http.listen(PORT, () => {
