@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Source+Code+Pro&display=swap');
+
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+:root{
+    --roboto: 'Roboto',sans-serif;
+    --code: 'Source Code Pro',monospace;
+    --gray1: #d3d3d3;
+    --gray2: #bdbdbd;
+    --gray3: #9e9e9e;
+    --gray4: #7d7d7d;
+    --gray5: #696969;
+    --paddingLeft: 1vw;
+    --paddingBottom: 1vh;
+}
+
+body{
+    margin: 0;
+    font-family: var(--roboto);
+}

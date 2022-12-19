@@ -1,0 +1,9 @@
+.codeEditorContainer{
+    padding-left: var(--paddingLeft);
+}
+.codeEditorTextArea{
+    width: 98vw;
+    height: 75vh;
+    font-family: var(--code);
+    padding-right: var(--paddingLeft);
+}

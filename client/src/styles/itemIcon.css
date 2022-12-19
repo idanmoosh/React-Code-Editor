@@ -1,0 +1,14 @@
+
+.itemButton{
+    border: 1px solid black;
+    padding: 1vw;
+    margin: 1vw;
+    border-radius: 10px;
+    text-decoration: none;
+    color: black;
+    text-transform:uppercase;
+}
+
+.itemButton:hover{
+    background-color: var(--gray1);
+}

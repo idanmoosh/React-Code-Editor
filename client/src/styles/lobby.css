@@ -1,0 +1,4 @@
+.lobbyHeader{
+    padding-left: var(--paddingLeft);
+    padding-bottom: var(--paddingBottom);
+}
