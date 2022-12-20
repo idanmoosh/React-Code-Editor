@@ -1,12 +1,16 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { ItemIcon } from './ItemIcon';
 import '../styles/lobby.css';
-import { caseList } from '../db';
 
 export function Lobby() {
-  fetch('/cases')
-    .then(res => res.json())
-    .then(data => console.log(data));
+  const [caseList, setCaseList] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3001/cases')
+      .then(res => res.json())
+      .then(data => setCaseList(data));
+  }, []);
+
   return (
     <div className='lobbyContainer'>
       <h2 className='lobbyHeader'>Choose code block</h2>

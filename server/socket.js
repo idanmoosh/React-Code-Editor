@@ -1,3 +1,6 @@
+const { updateBlock } = require('./models/mongodb.js');
+const codeBlockDBManager = require('./models/mongodb.js');
+
 function socket(server) {
   const io = require('socket.io')(server, {
     cors: {
@@ -12,13 +15,15 @@ function socket(server) {
 
     console.log(`user ${socket.id} just connected`);
 
-    socket.on('getCase', caseName => {
-      const data = 'this is the data loaded';
+    socket.on('getCase', async caseName => {
+      const block = await codeBlockDBManager.getBlock(caseName.case);
+
       socket.join(caseName.case);
 
-      socket.emit('loadCase', data);
+      socket.emit('loadCase', block[0]);
     });
-    socket.on('sendChanges', (value, caseName) => {
+    socket.on('sendChanges', async (value, caseName) => {
+      await codeBlockDBManager.updateBlock(caseName.case, value);
       socket.broadcast.to(caseName.case).emit('getChanges', value);
     });
   });

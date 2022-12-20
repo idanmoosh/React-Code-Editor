@@ -1,7 +1,6 @@
 import React from 'react';
 import '../styles/coderEditor.css';
 import { useEffect, useState } from 'react';
-import { caseList } from '../db';
 import { useParams } from 'react-router-dom';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
@@ -13,13 +12,12 @@ export function CodeEditor() {
   hljs.registerLanguage('javascript', javascript);
 
   const caseName = useParams();
-  const caseDetails = caseList.filter(item => item.link === caseName.case);
-  const [value, setValue] = useState(caseDetails[0].content);
+  const [value, setValue] = useState();
   const [socket, setSocket] = useState();
 
   // HANDLERS
   const handleChange = e => {
-    setValue(e.target.value);
+    setValue({ ...value, content: e.target.value });
   };
 
   /// USE EFFECTS
@@ -30,8 +28,9 @@ export function CodeEditor() {
       s.disconnect();
     };
   }, []);
+
   useEffect(() => {
-    if (socket == null) return;
+    if (!socket) return;
 
     socket.emit('getCase', caseName);
     socket.on('loadCase', data => {
@@ -40,7 +39,7 @@ export function CodeEditor() {
   }, [caseName, socket]);
 
   useEffect(() => {
-    if (socket == null) {
+    if (!socket) {
       return;
     }
     socket.emit('sendChanges', value, caseName);
@@ -53,15 +52,18 @@ export function CodeEditor() {
     hljs.highlightAll();
   });
 
+  if (!value) {
+    return;
+  }
   return (
     <div className='codeEditorContainer'>
-      <h2 className='codeEditorTitle'>{caseDetails[0].title}</h2>
+      <h2 className='codeEditorTitle'>{value.title}</h2>
       <pre>
-        <code className='javascript'>{value}</code>
+        <code className='javascript'>{value.content}</code>
       </pre>
       <textarea
         className='codeEditorTextArea'
-        value={value}
+        value={value.content}
         onChange={handleChange}></textarea>
     </div>
   );

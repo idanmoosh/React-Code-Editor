@@ -21,9 +21,12 @@ class codeBlockDBManager {
 
   async updateBlock(link, content) {
     try {
-      await codeBlock.findOneAndUpdate({ link: link }, { content: content });
+      const update = await codeBlock.findOneAndUpdate(
+        { link: link },
+        { content: content.content }
+      );
 
-      console.log('block updated');
+      return update;
     } catch (err) {
       console.log(err.message);
     }
