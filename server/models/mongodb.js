@@ -30,7 +30,7 @@ class codeBlockDBManager {
   }
 
   async seedDatabase() {
-    blocks = [
+    const blocks = [
       {
         title: 'async case',
         link: 'async_case',

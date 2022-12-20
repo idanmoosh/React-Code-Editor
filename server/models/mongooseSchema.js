@@ -4,7 +4,7 @@ const codeBlockSchema = new mongoose.Schema({
   title: String,
   link: String,
   content: String,
-  Solution: String,
+  solution: String,
 });
 
 module.exports = mongoose.model('codeBlock', codeBlockSchema);

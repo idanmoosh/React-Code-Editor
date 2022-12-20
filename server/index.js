@@ -13,6 +13,7 @@ mongoose.connect(process.env.URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+mongoose.set('strictQuery', true);
 
 const connection = mongoose.connection;
 connection.once('open', () => {
@@ -21,10 +22,10 @@ connection.once('open', () => {
 
 app.use(express.json());
 app.use(cors());
+app.use(controller);
 
 socket(http);
 
 http.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}`);
 });
-controller(app);
