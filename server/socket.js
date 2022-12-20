@@ -6,10 +6,16 @@ function socket(server) {
     },
   });
 
-  io.on('connection', socket => {
+  io.on('connection', async socket => {
     console.log(`user ${socket.id} just connected`);
-    socket.on('sendChanges', value => {
-      socket.broadcast.emit('getChanges', value);
+
+    socket.on('getCase', caseName => {
+      const data = 'this is the data loaded';
+      socket.join(caseName);
+      socket.emit('loadCase', data);
+      socket.on('sendChanges', value => {
+        socket.broadcast.to(caseName).emit('getChanges', value);
+      });
     });
   });
 }

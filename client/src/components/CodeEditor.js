@@ -30,6 +30,13 @@ export function CodeEditor() {
       s.disconnect();
     };
   }, []);
+  useEffect(() => {
+    if (socket == null) return;
+    socket.on('loadCase', data => {
+      setValue(data);
+    });
+    socket.emit('getCase', caseName);
+  }, [caseName, socket]);
 
   useEffect(() => {
     if (socket == null) {
@@ -51,15 +58,6 @@ export function CodeEditor() {
   useEffect(() => {
     hljs.highlightAll();
   });
-
-  useEffect(() => {
-    if (socket == null) return;
-    socket.once('loadCase', codeCase => {
-      setValue(codeCase);
-    });
-
-    socket.emit('getCase', caseName);
-  }, [caseName, socket]);
 
   return (
     <div className='codeEditorContainer'>
