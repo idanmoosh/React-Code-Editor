@@ -7,7 +7,7 @@ export const ItemIcon = props => {
   const link = props.link;
 
   return (
-    <Link className='itemButton' to={`${link}`}>
+    <Link className='itemButton' to={`cases/${link}`}>
       {title}
     </Link>
   );

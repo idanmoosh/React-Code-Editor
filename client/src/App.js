@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Lobby />} />
-          <Route path='/:case' element={<CodeEditor />} />
+          <Route path='cases/:case' element={<CodeEditor />} />
           <Route path='*' element={<NoMatch />} />
         </Route>
       </Routes>

@@ -52,6 +52,15 @@ export function CodeEditor() {
     hljs.highlightAll();
   });
 
+  useEffect(() => {
+    if (socket == null) return;
+    socket.once('loadCase', codeCase => {
+      setValue(codeCase);
+    });
+
+    socket.emit('getCase', caseName);
+  }, [caseName, socket]);
+
   return (
     <div className='codeEditorContainer'>
       <h2 className='codeEditorTitle'>{caseDetails[0].title}</h2>
