@@ -7,15 +7,19 @@ function socket(server) {
   });
 
   io.on('connection', async socket => {
+    let socketsList = [];
+    socketsList.push(socket.id);
+
     console.log(`user ${socket.id} just connected`);
 
     socket.on('getCase', caseName => {
       const data = 'this is the data loaded';
-      socket.join(caseName);
+      socket.join(caseName.case);
+
       socket.emit('loadCase', data);
-      socket.on('sendChanges', value => {
-        socket.broadcast.to(caseName).emit('getChanges', value);
-      });
+    });
+    socket.on('sendChanges', (value, caseName) => {
+      socket.broadcast.to(caseName.case).emit('getChanges', value);
     });
   });
 }

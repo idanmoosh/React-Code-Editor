@@ -32,28 +32,22 @@ export function CodeEditor() {
   }, []);
   useEffect(() => {
     if (socket == null) return;
+
+    socket.emit('getCase', caseName);
     socket.on('loadCase', data => {
       setValue(data);
     });
-    socket.emit('getCase', caseName);
   }, [caseName, socket]);
 
   useEffect(() => {
     if (socket == null) {
       return;
     }
-    socket.emit('sendChanges', value);
-  }, [value, socket]);
-
-  useEffect(() => {
-    if (socket == null) {
-      return;
-    }
-
+    socket.emit('sendChanges', value, caseName);
     socket.on('getChanges', value => {
       setValue(value);
     });
-  }, [socket]);
+  }, [value, socket, caseName]);
 
   useEffect(() => {
     hljs.highlightAll();
