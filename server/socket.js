@@ -9,12 +9,12 @@ function socket(server) {
     },
   });
 
+  const connections = [];
+
   io.on('connection', async socket => {
-    let socketsList = [];
-    socketsList.push(socket.id);
+    connections.push(socket);
 
     console.log(`user ${socket.id} just connected`);
-
     socket.on('getCase', async caseName => {
       const block = await codeBlockDBManager.getBlock(caseName.case);
 
