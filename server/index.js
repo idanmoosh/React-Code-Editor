@@ -9,7 +9,9 @@ require('dotenv').config();
 const http = require('http').Server(app);
 const cors = require('cors');
 
-mongoose.connect(process.env.URI, {
+URI =
+  'mongodb+srv://idanmoosh:idanmoosh123@cluster0.w5hg68l.mongodb.net/?retryWrites=true&w=majority';
+mongoose.connect(URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
