@@ -24,7 +24,11 @@ connection.once('open', () => {
 });
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: 'https://react-code-editor-front.onrender.com',
+  })
+);
 app.use(controller);
 
 socket(http);
