@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 import javascript from 'highlight.js/lib/languages/javascript';
+import { backendURL } from '../config';
 
 import { io } from 'socket.io-client';
 
@@ -22,7 +23,7 @@ export function CodeEditor() {
 
   /// USE EFFECTS
   useEffect(() => {
-    const s = io('http://localhost:3001');
+    const s = io(`${backendURL}`);
     setSocket(s);
     return () => {
       s.disconnect();

@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { ItemIcon } from './ItemIcon';
 import '../styles/lobby.css';
+import { backendURL } from '../config';
 
 export function Lobby() {
   const [caseList, setCaseList] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/cases')
+    fetch(`${backendURL}/cases`)
       .then(res => res.json())
       .then(data => setCaseList(data));
   }, []);
