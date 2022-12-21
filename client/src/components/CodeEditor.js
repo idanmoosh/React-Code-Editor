@@ -23,7 +23,7 @@ export function CodeEditor() {
 
   /// USE EFFECTS
   useEffect(() => {
-    const s = io(`${backendURL}`);
+    const s = io(backendURL);
     setSocket(s);
     return () => {
       s.disconnect();

@@ -7,7 +7,7 @@ export function Lobby() {
   const [caseList, setCaseList] = useState([]);
 
   useEffect(() => {
-    fetch(`${backendURL}/cases`)
+    fetch(backendURL + '/cases')
       .then(res => res.json())
       .then(data => setCaseList(data));
   }, []);
